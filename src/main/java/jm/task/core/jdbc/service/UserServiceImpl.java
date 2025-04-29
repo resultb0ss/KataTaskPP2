@@ -1,6 +1,7 @@
 package jm.task.core.jdbc.service;
 
 import jm.task.core.jdbc.dao.UserDao;
+import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 
 import java.util.List;
@@ -10,8 +11,8 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
     private static final UserService INSTANCE = new UserServiceImpl();
 
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
+    public UserServiceImpl() {
+        this.userDao = UserDaoJDBCImpl.getInstance();
     }
 
     public static UserService getInstance() {

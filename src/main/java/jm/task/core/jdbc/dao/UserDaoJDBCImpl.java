@@ -121,9 +121,9 @@ public class UserDaoJDBCImpl implements UserDao {
                 User user = new User();
 
                 user.setId(resultSet.getLong("id"));
-                user.setId(resultSet.getLong("name"));
-                user.setId(resultSet.getLong("last_name"));
-                user.setId(resultSet.getLong("age"));
+                user.setName(resultSet.getString("name"));
+                user.setLastName(resultSet.getString("last_name"));
+                user.setAge(resultSet.getByte("age"));
 
                 users.add(user);
             }
@@ -138,7 +138,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void cleanUsersTable() {
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(CLEAN_USERS_TABLE_SQL)) {
+        try (Connection connection = ConnectionManager.get();
+             PreparedStatement preparedStatement = connection.prepareStatement(CLEAN_USERS_TABLE_SQL)) {
 
             preparedStatement.execute();
 
