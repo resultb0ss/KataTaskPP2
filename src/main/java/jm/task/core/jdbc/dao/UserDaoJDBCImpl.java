@@ -4,10 +4,7 @@ import jm.task.core.jdbc.exception.DaoException;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.ConnectionManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,9 +51,9 @@ public class UserDaoJDBCImpl implements UserDao {
     public void createUsersTable() {
 
         try (Connection connection = ConnectionManager.get();
-             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_USERS_TABLE_SQL)) {
+             Statement statement = connection.createStatement()) {
 
-            preparedStatement.execute();
+            statement.execute(CREATE_USERS_TABLE_SQL);
 
         } catch (SQLException ex) {
             throw new DaoException(ex);
@@ -67,9 +64,9 @@ public class UserDaoJDBCImpl implements UserDao {
     public void dropUsersTable() {
 
         try (Connection connection = ConnectionManager.get();
-             PreparedStatement preparedStatement = connection.prepareStatement(DROP_USERS_TABLE_SQL)) {
+             Statement statement = connection.createStatement()) {
 
-            preparedStatement.execute();
+            statement.execute(DROP_USERS_TABLE_SQL);
 
         } catch (SQLException ex) {
             throw new DaoException(ex);
@@ -139,9 +136,9 @@ public class UserDaoJDBCImpl implements UserDao {
     public void cleanUsersTable() {
 
         try (Connection connection = ConnectionManager.get();
-             PreparedStatement preparedStatement = connection.prepareStatement(CLEAN_USERS_TABLE_SQL)) {
+             Statement statement = connection.createStatement()) {
 
-            preparedStatement.execute();
+            statement.execute(CLEAN_USERS_TABLE_SQL);
 
 
         } catch (SQLException ex) {
